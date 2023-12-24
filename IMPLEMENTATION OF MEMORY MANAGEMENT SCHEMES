@@ -1,0 +1,85 @@
+#include<stdio.h> 
+#include<conio.h> 
+#include<string.h> 
+#include<stdlib.h> 
+void bestfit(int bf[],int sp); 
+void firstfit(int ff[],int sp); 
+void worstfit(int wf[],int sp); 
+int n; 
+void main( ) 
+{ 
+int bf[10],ff[10],w[10],sp[10],i,j,m; 
+clrscr(); 
+printf(“\nEnter the number of free blocks”); 
+scanf(“%d”,&n); 
+printf(“enter the free block size\n”); 
+for(i=0;i<n;i++) 
+{ 
+scanf(“%d”,&bf[i]); 
+ff[i]=wf[i]=bf[i]; 
+} 
+printf(“Enter the number of process”); 
+scanf(“%d”,&m); 
+printf(“Enter the size of the process”); 
+for(i=0;i<m;i++) 
+scanf (“%d”,&sp[i]); 
+puts(“BESTFIT\t\t\tWORSTFIT\t\t\tFIRSTFIT\n”); 
+for(j=0;j<m;j++) 
+{ 
+bestfit(bf,sp[j]); 
+worstfit(wf,sp[j]); 
+firstfit(ff,sp[j]); 
+} 
+printf(“\n\n”); 
+getch( ); 
+} 
+void bestfit(int bf[],int ps) 
+{ 
+int min = 9999,I,bno,flag=0; 
+for(i=0;i<n;i++) 
+if(bf[i]<min&&bf[i]>ps) 
+{ 
+min=bf[i]; 
+bno=i; 
+flag=1; 
+} 
+if(flag==1) 
+{ 
+bf[bno]=ps; 
+printf(“\n%dblock%d”,ps,bno+1); 
+} 
+else 
+printf(“\n%d not available”,ps); 
+return; 
+} 
+void firstfit(int ff[],int ps) 
+{ 
+int i; 
+for(i=0;i<n;i++) 
+if(ff[i]>=ps) 
+{ 
+ff[i]=ps; 
+printf(“\t\tBlock%d”,i+1); 
+return; 
+} 
+printf(“\t\t not available”); 
+return; 
+} 
+void worstfit(int wf[],int ps) 
+{ 
+int max=0,I,bno; 
+for(i=0;i<n;i++) 
+if(wf[i]>max) 
+{ 
+max=wf[i]; 
+bno=I; 
+} 
+if(max>=ps) 
+{ 
+wf[bno]=ps; 
+printf(“\t\t\t block%d”,bno+1); 
+} 
+else 
+printf(“\t\t\t not available”); 
+return; 
+} 
